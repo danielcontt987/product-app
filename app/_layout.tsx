@@ -11,11 +11,13 @@ import 'react-native-reanimated';
 
 export default function RootLayout() {
 
+  const colorScheme = useColorScheme();
+
   const [loaded] = useFonts({
     KanitRegular: require('../assets/fonts/Kanit-Regular.ttf'),
     KanitBold: require('../assets/fonts/Kanit-Bold.ttf'),
     KanitThin: require('../assets/fonts/Kanit-Thin.ttf')
-  })
+  });
 
   useEffect(() => {
     if (loaded) {
@@ -26,17 +28,16 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-  const colorScheme = useColorScheme();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{
-        headerShown: false
-      }}>
-        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} /> */}
-      </Stack>
+      <Stack
+        screenOptions={{
+          headerShown: false
+        }}
+      />
       <StatusBar style="auto" />
     </ThemeProvider>
   );
 }
+
