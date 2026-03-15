@@ -2,6 +2,7 @@ import ThemeInput from '@/presentation/theme/components/theme-input';
 import ThemedBotton from '@/presentation/theme/components/themed-botton';
 import ThemedLink from '@/presentation/theme/components/themed-link';
 import { ThemedText } from '@/presentation/theme/components/themed-text';
+import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
 import { KeyboardAvoidingView, ScrollView, useWindowDimensions, View } from 'react-native';
 
 
@@ -9,11 +10,13 @@ const LoginScreen = () => {
 
 
   const { height } = useWindowDimensions();
+  const backgroundColor = useThemeColor({}, 'background')
 
   return (
     <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }} >
       <ScrollView style={{
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
+        backgroundColor: backgroundColor
       }}>
         {/* Letras de presentación */}
         <View style={{ paddingTop: height * 0.35 }}>
