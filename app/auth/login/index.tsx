@@ -25,8 +25,6 @@ const LoginScreen = () => {
 
   const onLogin = async() => {
     const {email, password} = form
-
-    console.log({email, password});
     
     if (email.length === 0 || password.length === 0) {
        return;
@@ -37,7 +35,7 @@ const LoginScreen = () => {
     setIsPosting(false);
 
     if (wasSuccessfull) {
-      router.replace('/')
+      router.replace('/(products-app)/(home)')
       return;
     }
     Alert.alert('Error', 'Usuario o contraseña no son correctos')

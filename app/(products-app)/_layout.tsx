@@ -29,28 +29,29 @@ const CheckAuthenticacionLayout = () => {
     }
 
     if (status === 'unautheticaded') {
-        return <Redirect href='/auth/login'/>
+        return <Redirect href='/auth/login' />
     }
 
 
     return (
-    <Stack
-        screenOptions={{
-            headerShadowVisible: false,
-            headerStyle:{
-                backgroundColor: backgroundColor
-            },
-            contentStyle: {
-                backgroundColor: backgroundColor
-            }
-        }}
-    >
-        <Stack.Screen 
-            options={{
-                title: 'Productos',
+        <Stack
+            screenOptions={{
+                headerShadowVisible: false,
+                headerStyle: {
+                    backgroundColor: backgroundColor
+                },
+                contentStyle: {
+                    backgroundColor: backgroundColor
+                }
             }}
-        />
-    </Stack>
+        >
+            <Stack.Screen
+                name="(home)/index"
+                options={{
+                    title: 'Productos',
+                }}
+            />
+        </Stack>
     )
 
 
