@@ -41,7 +41,6 @@ const ThemeInput = ({ icon, iconShow, ...rest }: Props) => {
                 onBlur={() => setIsActive(false)}
                 placeholderTextColor="#5c5c5c"
                 {...rest}
-                secureTextEntry={!showPassword}
             />
 
             {iconShow && (
