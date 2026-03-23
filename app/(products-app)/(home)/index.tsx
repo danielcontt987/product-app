@@ -1,18 +1,30 @@
-import { ThemedText } from '@/presentation/theme/components/themed-text'
-import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
-import React from 'react'
-import { View } from 'react-native'
+import ProductList from '@/presentation/products/components/ProductList';
+import { useProducts } from '@/presentation/products/hooks/useProducts';
+import { ActivityIndicator, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
-  const primary = useThemeColor({}, 'primary')
+  //LoadNextPage es cuando llego a un tipo del limite del scroll y productsQuery cuando yo ya tengo productos
+
+  const { productsQuery, loadNextPage } = useProducts();
+  if (productsQuery.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator
+          size={30}
+        />
+      </View>
+    )
+  }
+
   return (
-    <View style={{paddingHorizontal: 20, paddingTop: 100}}>
-      <ThemedText>HomeScreen</ThemedText>
-      <ThemedText style={{fontFamily: 'KanitBold', color: primary}}>HomeScreen</ThemedText>
-      <ThemedText style={{fontFamily: 'KanitRegular'}}>HomeScreen</ThemedText>
-      <ThemedText style={{fontFamily: 'KanitThin'}}>HomeScreen</ThemedText>
-    </View>
+    <SafeAreaView>
+      <View style={{ paddingHorizontal: 20 }}>
+        <ProductList products={productsQuery.data?.pages.flatMap(page => page) ?? []} loadNextPage={loadNextPage} />
+      </View>
+    </SafeAreaView>
   )
+
 }
 
 export default HomeScreen

@@ -1,8 +1,8 @@
-import { getProducts } from "@/core/product/actions/get-products.action"
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { getProducts } from "@/core/product/actions/get-products.action";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const useProducts = () => {
-
+    
     const productsQuery =  useInfiniteQuery({
         queryKey: ['products', 'infinite'],
         queryFn: ({pageParam}) => getProducts(20, pageParam * 20),
