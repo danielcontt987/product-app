@@ -1,77 +1,99 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
-import { Pressable, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
+import {
+    Pressable,
+    StyleProp,
+    StyleSheet,
+    TextInput,
+    TextInputProps,
+    View,
+    ViewStyle
+} from "react-native";
 import { useThemeColor } from "../hooks/use-theme-color";
 
 interface Props extends TextInputProps {
-    icon?: keyof typeof Ionicons.glyphMap
-    iconShow?: keyof typeof Ionicons.glyphMap
+  icon?: keyof typeof Ionicons.glyphMap;
+  iconShow?: boolean; // 👈 mejor como boolean
+  containerStyle?: StyleProp<ViewStyle>; // 👈 estilo del contenedor
 }
 
-const ThemeInput = ({ icon, iconShow, ...rest }: Props) => {
+const ThemeInput = ({
+  icon,
+  iconShow,
+  style,
+  containerStyle,
+  ...rest
+}: Props) => {
 
-    const primaryColor = useThemeColor({}, 'primary')
-    const textColor = useThemeColor({}, 'text')
-    
+  const primaryColor = useThemeColor({}, "primary");
+  const textColor = useThemeColor({}, "text");
 
-    const [isActive, setIsActive] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-    const inputRef = useRef<TextInput>(null)
+  const inputRef = useRef<TextInput>(null);
 
-    return (
-        <View style={{
-            ...styles.border,
-            borderColor: isActive ? primaryColor : '#ccc'
-        }}
-            onTouchStart={() => inputRef.current?.focus()}
-        >
-            {icon && (
-                <Ionicons
-                    name={icon}
-                    size={24}
-                    color={textColor}
-                    style={{ marginRight: 10 }}
-                />
-            )}
-            <TextInput
-                ref={inputRef}
-                style={{ ...styles.input, color: textColor, marginRight: 10, flex: 1 }}   // IMPORTANTE
-                onFocus={() => setIsActive(true)}
-                onBlur={() => setIsActive(false)}
-                placeholderTextColor="#5c5c5c"
-                {...rest}
-            />
+  return (
+    <View
+      style={[
+        styles.border,
+        { borderColor: isActive ? primaryColor : "#ccc" },
+        containerStyle
+      ]}
+      onTouchStart={() => inputRef.current?.focus()}
+    >
+      {icon && (
+        <Ionicons
+          name={icon}
+          size={24}
+          color={textColor}
+          style={{ marginRight: 10 }}
+        />
+      )}
 
-            {iconShow && (
-                <Pressable onPress={() => setShowPassword(!showPassword)}>
-                    <Ionicons
-                        name={showPassword ? "eye-outline" : "eye-off-outline"}
-                        size={24}
-                        color={textColor}
-                        style={{ marginLeft: 10 }}
-                    />
-                </Pressable>
-            )}
-        </View>
-    )
-}
+      <TextInput
+        ref={inputRef}
+        style={[
+          styles.input,
+          { color: textColor },
+          style // 👈 este sí es TextStyle
+        ]}
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setIsActive(false)}
+        placeholderTextColor="#5c5c5c"
+        secureTextEntry={iconShow ? !showPassword : false} // 👈 FIX password
+        {...rest}
+      />
 
-export default ThemeInput
+      {iconShow && (
+        <Pressable onPress={() => setShowPassword(!showPassword)}>
+          <Ionicons
+            name={showPassword ? "eye-outline" : "eye-off-outline"}
+            size={24}
+            color={textColor}
+            style={{ marginLeft: 10 }}
+          />
+        </Pressable>
+      )}
+    </View>
+  );
+};
+
+export default ThemeInput;
 
 const styles = StyleSheet.create({
-    border: {
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        height: 50,
-        marginBottom: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
+  border: {
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    height: 50,
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
 
-    input: {
-        flex: 1, // empuja el icono a la derecha
-        fontSize: 16
-    }
-})
+  input: {
+    flex: 1,
+    fontSize: 16,
+  },
+});
