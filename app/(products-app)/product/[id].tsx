@@ -1,3 +1,4 @@
+import ProductImages from '@/presentation/products/components/ProductImages';
 import { useProduct } from '@/presentation/products/hooks/useProduct';
 import ThemeInput from '@/presentation/theme/components/theme-input';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
@@ -51,6 +52,7 @@ const ProductScreen = () => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView>
         {/*TODO: Product Images */}
+        <ProductImages images={product.images} />
         <ThemedView style={{ marginHorizontal: 12, marginTop: 20 }}>
           <ThemeInput placeholder='Titulo' style={{ marginVertical: 5 }} />
           <ThemeInput placeholder='Slug' style={{ marginVertical: 5 }} />
