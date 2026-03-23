@@ -1,7 +1,6 @@
 import ProductList from '@/presentation/products/components/ProductList';
 import { useProducts } from '@/presentation/products/hooks/useProducts';
 import { ActivityIndicator, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
   //LoadNextPage es cuando llego a un tipo del limite del scroll y productsQuery cuando yo ya tengo productos
@@ -18,11 +17,9 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView>
       <View style={{ paddingHorizontal: 20 }}>
         <ProductList products={productsQuery.data?.pages.flatMap(page => page) ?? []} loadNextPage={loadNextPage} />
       </View>
-    </SafeAreaView>
   )
 
 }
