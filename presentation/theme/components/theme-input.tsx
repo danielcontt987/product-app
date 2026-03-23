@@ -1,20 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 import {
-    Pressable,
-    StyleProp,
-    StyleSheet,
-    TextInput,
-    TextInputProps,
-    View,
-    ViewStyle
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle
 } from "react-native";
 import { useThemeColor } from "../hooks/use-theme-color";
 
 interface Props extends TextInputProps {
   icon?: keyof typeof Ionicons.glyphMap;
-  iconShow?: boolean; // 👈 mejor como boolean
-  containerStyle?: StyleProp<ViewStyle>; // 👈 estilo del contenedor
+  iconShow?: boolean;
+  containerStyle?: StyleProp<ViewStyle>; 
 }
 
 const ThemeInput = ({
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    height: 50,
+    minHeight: 50,
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
