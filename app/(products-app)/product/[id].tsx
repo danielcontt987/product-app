@@ -1,6 +1,7 @@
 import ProductImages from '@/presentation/products/components/ProductImages';
 import { useProduct } from '@/presentation/products/hooks/useProduct';
 import ThemeInput from '@/presentation/theme/components/theme-input';
+import ThemedBotton from '@/presentation/theme/components/themed-botton';
 import ThemedBottonGroup from '@/presentation/theme/components/themed-botton-group';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
 import { Ionicons } from '@expo/vector-icons';
@@ -51,7 +52,7 @@ const ProductScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={60}>
-      <ScrollView keyboardShouldPersistTaps='handled'>
+      <ScrollView showsVerticalScrollIndicator={false} >
         {/*TODO: Product Images */}
         <ProductImages images={product.images} />
         <ThemedView style={{ marginHorizontal: 12, marginTop: 20 }}>
@@ -77,9 +78,20 @@ const ProductScreen = () => {
         </ThemedView>
         <ThemedView style={{marginHorizontal: 10}}>
           <ThemedBottonGroup options={['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']}
-          selectedOptions={product.sizes} 
-            onSelect={(options) => console.log({options})}
+            selectedOptions={product.sizes} 
+              onSelect={(options) => console.log({options})}
           />
+          <ThemedBottonGroup options={['kid', 'men', 'women', 'unisex']}
+            selectedOptions={[product.gender]} 
+              onSelect={(options) => console.log({options})}
+          />
+        </ThemedView>
+        <ThemedView
+          style={{marginHorizontal: 10, marginBottom: 50, marginTop: 20}}
+        >
+          <ThemedBotton icon='save-outline' onPress={() => console.log("hola")}>
+            Guardar
+          </ThemedBotton>
         </ThemedView>
       </ScrollView>
     </KeyboardAvoidingView>

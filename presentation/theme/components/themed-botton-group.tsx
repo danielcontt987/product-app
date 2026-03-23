@@ -32,7 +32,8 @@ const ThemedBottonGroup = ({options, selectedOptions, onSelect}:Props) => {
                         style={[
                             styles.botonText,
                             selectedOptions.includes(option) && styles.selectedBotonText
-                        ]}>{option}
+                        ]}>
+                        {option[0].toUpperCase() + option.slice(1)}
                     </Text>
                 </TouchableOpacity>
             ))
