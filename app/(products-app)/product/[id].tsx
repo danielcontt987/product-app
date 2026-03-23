@@ -1,6 +1,7 @@
 import ProductImages from '@/presentation/products/components/ProductImages';
 import { useProduct } from '@/presentation/products/hooks/useProduct';
 import ThemeInput from '@/presentation/theme/components/theme-input';
+import ThemedBottonGroup from '@/presentation/theme/components/themed-botton-group';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
 import { Ionicons } from '@expo/vector-icons';
 import { Redirect, useLocalSearchParams, useNavigation } from 'expo-router';
@@ -49,8 +50,8 @@ const ProductScreen = () => {
 
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={60}>
+      <ScrollView keyboardShouldPersistTaps='handled'>
         {/*TODO: Product Images */}
         <ProductImages images={product.images} />
         <ThemedView style={{ marginHorizontal: 12, marginTop: 20 }}>
@@ -72,6 +73,12 @@ const ProductScreen = () => {
           <ThemeInput
             placeholder='Inventario'
             containerStyle={{ flex: 1 }}
+          />
+        </ThemedView>
+        <ThemedView style={{marginHorizontal: 10}}>
+          <ThemedBottonGroup options={['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']}
+          selectedOptions={product.sizes} 
+            onSelect={(options) => console.log({options})}
           />
         </ThemedView>
       </ScrollView>
